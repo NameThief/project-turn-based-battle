@@ -1,4 +1,5 @@
 console.log("✅ EnemyAssetScene.js est bien chargé !");
+
 class EnemyAssetScene extends Phaser.Scene {
     constructor() {
         super({ key: 'EnemyAssetScene' });
@@ -12,23 +13,30 @@ class EnemyAssetScene extends Phaser.Scene {
         this.load.image('enemyMage_damage', 'assets/mage_damage.png');
         this.load.image('enemyMage_death', 'assets/mage_death.png');
         this.load.image('manaShield', 'assets/mana_shield.png');
+        this.load.image('flameEffect', 'assets/flame.png'); // ✅ Ajout de l'image flameEffect
 
         console.log("Images de l'ennemi chargées !");
     }
 
     create() {
         console.log("🎬 EnemyAssetScene: create() est exécuté !");
-        if (this.textures.exists('enemyMage_idle')) {
-            console.log("✅ L'image enemyMage_idle est bien chargée !");
-            this.enemySprite = this.add.image(600, 300, 'enemyMage_idle').setScale(2);
-        } else {
-            console.log("❌ Erreur : L'image enemyMage_idle n'est PAS chargée !");
-            this.manaShieldSprite = this.add.image(600, 300, 'manaShield')
-    .setVisible(false)
-    .setDepth(10); // ✅ Place l'image AU-DESSUS du Mage
-        }
+        
+        // ✅ Création du sprite de l'ennemi
+        this.enemySprite = this.add.image(600, 300, 'enemyMage_idle')
+            .setScale(2)
+            .setDepth(1);
+
+        // ✅ Création du Bouclier de Mana (invisible par défaut)
+        this.manaShieldSprite = this.add.image(600, 300, 'manaShield')
+            .setVisible(false)
+            .setDepth(10); // ✅ Toujours au-dessus du Mage
+
+        // ✅ Assurer que flameEffect est TOUJOURS défini
+        this.flameEffect = this.add.image(600, 300, 'flameEffect')
+            .setScale(0.10)
+            .setVisible(false)
+            .setDepth(15);  // ✅ Toujours au-dessus du Mage
     }
-    
 
     playAnimation(state) {
         if (this.enemySprite) {
@@ -48,7 +56,6 @@ class EnemyAssetScene extends Phaser.Scene {
             }
         }
     }
-    
 }
 
 export default EnemyAssetScene;

@@ -13,7 +13,7 @@ class PlayerAssetScene extends Phaser.Scene {
         this.load.image('player_attack', 'assets/knight_attack.png');
         this.load.image('player_damage', 'assets/knight_damage.png');
         this.load.image('player_death', 'assets/knight_death.png');
-
+        this.load.image('flameEffect', 'assets/flame.png');
         console.log("✅ Images du joueur chargées !");
     }
 

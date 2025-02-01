@@ -52,6 +52,19 @@ export function playerFlame(scene) {
         scene.player.mana -= manaCost;
         scene.playerManaText.setText(`Mana: ${scene.player.mana}`);
 
+        // ✅ Vérifie que `flameEffect` existe dans `EnemyAssetScene`
+        if (scene.enemyScene.flameEffect) {
+            scene.enemyScene.flameEffect.setVisible(true);
+
+            // ✅ Cache la flamme après 0.5s
+            scene.time.delayedCall(500, () => {
+                scene.enemyScene.flameEffect.setVisible(false);
+            });
+        } else {
+            console.error("❌ ERREUR : flameEffect n'existe pas !");
+        }
+
+        // ✅ Gestion du bouclier ou des dégâts normaux
         if (scene.enemyManaShield > 0) {
             let absorbed = Math.min(scene.enemyManaShield, damage);
             scene.enemyManaShield -= absorbed;
@@ -69,6 +82,7 @@ export function playerFlame(scene) {
             scene.scene.get('UIScene').updateMessage("🔥 Tu lances Flamme !");
         }
 
+        // ✅ Animation d’attaque du joueur et impact sur l’ennemi
         scene.playerScene.playAnimation('attack');
         scene.time.delayedCall(500, () => {
             scene.enemyScene.playAnimation('damage');
@@ -79,16 +93,13 @@ export function playerFlame(scene) {
         scene.scene.get('UIScene').updateMessage("❌ Pas assez de mana !");
     }
 
+    // ✅ Remet le joueur en position idle après l’attaque
     scene.time.delayedCall(1000, () => {
         scene.playerScene.playAnimation('idle');
     });
 
     scene.endTurn();
 }
-
-
-
-
 export function playerPotion(scene) {
     if (isPlayerParalyzed(scene)) return; // Vérifie la paralysie et bloque si nécessaire
     if (scene.currentTurn !== "player") return;
