@@ -14,7 +14,8 @@ class EnemyAssetScene extends Phaser.Scene {
         this.load.image('enemyMage_death', 'assets/mage_death.png');
         this.load.image('manaShield', 'assets/mana_shield.png');
         this.load.image('flameEffect', 'assets/flame.png'); // ✅ Ajout de l'image flameEffect
-
+        this.load.audio('manaShieldSound', 'assets/sounds/mana_shield.mp3'); // ✅ Vérifie le nom du fichier !
+        console.log("DEBUG: manaShieldSound chargé ?", this.cache.audio.has('manaShieldSound'))
         console.log("Images de l'ennemi chargées !");
     }
 

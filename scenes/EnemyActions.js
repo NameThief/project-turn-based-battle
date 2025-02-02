@@ -98,7 +98,8 @@ function enemyDistortionSpell(scene) {
 }
 
 // ✅ Nouveau sort : **Bouclier de Mana**
-export function enemyManaShield(scene) {
+export function enemyManaShield(scene) {  
+        scene.sound.play('manaShieldSound', { volume: 0.5 }); // 🛡 Vérification avant de jouer   
     if (scene.enemyManaShield > 0) {
         console.log("DEBUG: Bouclier déjà actif, impossible de le relancer.");
         return;

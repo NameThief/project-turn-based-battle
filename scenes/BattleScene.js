@@ -4,8 +4,12 @@ class BattleScene extends Phaser.Scene {
     constructor() {
         super({ key: 'BattleScene' });
     }
-
+    preload() {
+        this.load.audio('battleMusic', 'assets/music/battle_theme.mp3'); // 🎵 Charge la musique
+    }
+    
     create() {
+        this.sound.setVolume(0.1); // ✅ Réduit le volume global de tous les sons à 50%
         this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(800, 600);
         console.log("🎨 Background ajouté à la scène !");
         this.player = { 
@@ -25,7 +29,7 @@ class BattleScene extends Phaser.Scene {
             hp: 80, 
             maxHp: 80, // Ajout pour limiter la régénération de HP
             mana: 100, // Augmenté à 100
-            attack: 25, 
+            attack: 30, 
             defense: 3, 
             defenseCount: 0, 
             maxDefense: 5 
@@ -67,6 +71,12 @@ class BattleScene extends Phaser.Scene {
 
         this.enemyScene = this.scene.get('EnemyAssetScene');
         this.enemyScene.playAnimation('idle');
+        if (!this.music || !this.music.isPlaying) {
+            this.music = this.sound.add('battleMusic', { loop: true, volume: 0.5 });
+            this.music.play();
+        }
+        
+
 
         // Lancer l'UI
         this.scene.launch('UIScene');

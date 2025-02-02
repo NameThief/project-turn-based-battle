@@ -42,6 +42,7 @@ export function playerDefend(scene) {
 
 
 export function playerFlame(scene) {
+    scene.sound.play('flameSound', { volume: 0.5 }); // 🔥 Volume réduit à 50%
     if (isPlayerParalyzed(scene)) return;
     if (scene.currentTurn !== "player") return;
 

@@ -74,9 +74,11 @@ console.log("✅ manaShieldSprite ajouté à la scène.");
 
         createButton(120, 520, "📖 Grimoire", '#32CD32', '#006400', () => {
             this.openSubDialog("Liste des sorts", "🔥 Flamme", () => {
+                console.log("DEBUG: Bouton Flamme cliqué !");
                 this.scene.get('BattleScene').playerFlame();
             });
         });
+        
 
         createButton(520, 520, "🎒 Inventaire", '#FFD700', '#8B8000', () => {
             this.openInventory();
